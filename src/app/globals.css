@@ -1,0 +1,392 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --ink-deep: #102a2a;
+  --ink-accent: #0f766e;
+  --ink-accent-soft: #14b8a6;
+  --ink-wash: color-mix(in oklab, #d7ebe7 70%, white);
+  --panel: color-mix(in oklab, white 88%, #c5ddd8);
+  --hero-glow: color-mix(in oklab, #0f766e 28%, transparent);
+
+  --background: #e7eef0;
+  --foreground: #102a2a;
+  --card: #f4f8f8;
+  --card-foreground: #102a2a;
+  --popover: #f7fbfb;
+  --popover-foreground: #102a2a;
+  --primary: #0f766e;
+  --primary-foreground: #f4fffd;
+  --secondary: #d5e6e3;
+  --secondary-foreground: #143333;
+  --muted: #d9e5e6;
+  --muted-foreground: #4d6564;
+  --accent: #cfe8e3;
+  --accent-foreground: #0f3d3a;
+  --destructive: oklch(0.55 0.2 25);
+  --border: color-mix(in oklab, #102a2a 12%, transparent);
+  --input: color-mix(in oklab, #102a2a 14%, transparent);
+  --ring: #0f766e;
+  --chart-1: #0f766e;
+  --chart-2: #1d4e89;
+  --chart-3: #b45309;
+  --chart-4: #334155;
+  --chart-5: #0ea5a4;
+  --radius: 0.7rem;
+  --sidebar: #eef5f4;
+  --sidebar-foreground: #102a2a;
+  --sidebar-primary: #0f766e;
+  --sidebar-primary-foreground: #f4fffd;
+  --sidebar-accent: #d5e6e3;
+  --sidebar-accent-foreground: #143333;
+  --sidebar-border: color-mix(in oklab, #102a2a 10%, transparent);
+  --sidebar-ring: #0f766e;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(1200px 500px at 10% -10%, var(--hero-glow), transparent 60%),
+      radial-gradient(900px 420px at 90% 0%, color-mix(in oklab, #1d4e89 16%, transparent), transparent 55%),
+      linear-gradient(180deg, #edf3f4 0%, #e3ecee 45%, #dfe8ea 100%);
+    background-attachment: fixed;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+.font-display {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+}
+
+/* Landing */
+.landing-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #e8f4f2;
+}
+
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(8, 28, 30, 0.78), rgba(10, 36, 40, 0.55)),
+    url("/hero-ink.svg") center/cover no-repeat;
+  transform: scale(1.02);
+  animation: hero-drift 18s ease-in-out infinite alternate;
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(20, 184, 166, 0.22), transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(29, 78, 137, 0.2), transparent 40%);
+  pointer-events: none;
+}
+
+.landing-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .landing-inner {
+    padding: 3rem 3rem 4.5rem;
+    max-width: 1100px;
+  }
+}
+
+.brand-hero {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+  font-size: clamp(3.5rem, 12vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+  animation: rise-in 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-line {
+  margin-top: 1.25rem;
+  max-width: 28rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  line-height: 1.7;
+  color: color-mix(in oklab, white 86%, #99f6e4);
+  animation: rise-in 900ms 120ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-sub {
+  margin-top: 0.75rem;
+  max-width: 32rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: color-mix(in oklab, white 68%, #99f6e4);
+  animation: rise-in 900ms 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-actions {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  animation: rise-in 900ms 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.landing-section {
+  padding: 4.5rem 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.landing-section h2 {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: 0.04em;
+}
+
+.feature-row {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .feature-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-block h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.feature-block p {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* Studio */
+.studio-shell {
+  min-height: 100vh;
+}
+
+.studio-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(12px);
+  background: color-mix(in oklab, var(--background) 78%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-mark {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-deep);
+}
+
+.nav-chip {
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.nav-chip:hover {
+  background: color-mix(in oklab, var(--ink-accent) 10%, transparent);
+  color: var(--foreground);
+}
+
+.nav-chip-active {
+  background: color-mix(in oklab, var(--ink-accent) 16%, white);
+  color: var(--ink-deep);
+}
+
+.studio-aside {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 1rem;
+  height: fit-content;
+}
+
+.project-item {
+  width: 100%;
+  text-align: left;
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid transparent;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.project-item:hover {
+  background: color-mix(in oklab, white 55%, transparent);
+}
+
+.project-item-active {
+  background: white;
+  border-color: color-mix(in oklab, var(--ink-accent) 35%, transparent);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--ink-deep) 6%, transparent);
+}
+
+.chapter-rail {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 0.75rem;
+  height: fit-content;
+}
+
+.chapter-item {
+  width: 100%;
+  text-align: left;
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.6rem;
+}
+
+.chapter-item-active {
+  background: white;
+}
+
+.meta-bar,
+.editor-panel {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 1rem;
+}
+
+.editor-textarea {
+  font-family: var(--font-serif), "Noto Serif SC", serif;
+  line-height: 1.9;
+  font-size: 1.02rem;
+  background: color-mix(in oklab, white 82%, #d7ebe7) !important;
+}
+
+.native-select {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--input);
+  background: color-mix(in oklab, white 70%, transparent);
+  padding: 0 0.65rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.trope-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.trope-chip:hover {
+  border-color: var(--ink-accent);
+  transform: translateY(-1px);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.06) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-hero::before,
+  .brand-hero,
+  .hero-line,
+  .hero-sub,
+  .hero-actions {
+    animation: none !important;
+  }
+}
